@@ -1,15 +1,4 @@
 
-#{
-# Gabriela Corona Garza
-# A01282529
-# Compiladores tarea 3.2
-# A continuación se describe un pequeño lenguaje de programación. 
-# Se te pide que implementes 2 versiones de los analizadores de 
-# léxico y sintaxis (scanner y parser) necesarios para reconocerlo. 
-# Debes utilizar la herramienta que planeas usar para tu proyecto. 
-# El programa a ejecutar leerá los elementos de un archivo fuente (texto), 
-# revisará el léxico y la sintaxis y, en caso de existir error, desplegará 
-# en pantalla el mensaje “apropiado”.
 # LittleDuck2020
 # Herramienta que se está usando : Lark
 # https://github.com/lark-parser/lark
@@ -56,12 +45,17 @@ gramatica = """
      constante : ID 
                | NUMBER
      
-     PROGRAMA :"program"
+     PROGRAMA : "programa"
      ID : "id"
-     IF : "if"
-     ELSE : "else"
+     IF : "si"
+     ELSE : "sino"
      VAR : "var"
-     PRINT : "print"
+     PRINT : "escribir"
+     WHILE : "mientras"
+     STRING : "cadena"
+     INT : "entero"
+     CTE_I : "constante_ent"
+     CTE_F : "constante_flot"
      LPARENS : "("
      RPARENS : ")"
      LKEY : "{"
@@ -79,7 +73,7 @@ gramatica = """
      PTOCOM: ";"
      MOTHN : ">"
      LETHN : "<"
-     NEQ : "<>"
+     NEQ : "!="
 
 
      %import common.ESCAPED_STRING   -> STRING
