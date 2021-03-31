@@ -14,6 +14,7 @@ gramatica = """
                | VAR ID COLN tipo
      tipo : NUMBER 
      bloque : LKEY estatuto RKEY
+     ciclo : WHILE cond_body bloque
      estatuto : asignacion 
                | condicion 
                | escritura
@@ -26,12 +27,13 @@ gramatica = """
                | exp LETHN exp 
                | exp NEQ exp 
                | exp
-     condicion : IF LPARENS  expresion RPARENS bloque ELSE bloque PTOCOM
-               | IF LPARENS  expresion RPARENS bloque PTOCOM
+     condicion : IF cond_body bloque ELSE bloque PTOCOM
+               | IF cond_body bloque PTOCOM
+     cond_body : LPARENS expresion RPARENS
      exp : termino 
                | SUM 
                | SUB 
-               | exp
+               | exp  
      termino : factor 
                | MUL 
                | DIV 
@@ -46,7 +48,6 @@ gramatica = """
                | NUMBER
      
      PROGRAMA : "programa"
-     ID : "id"
      IF : "si"
      ELSE : "sino"
      VAR : "var"
@@ -54,8 +55,7 @@ gramatica = """
      WHILE : "mientras"
      STRING : "cadena"
      INT : "entero"
-     CTE_I : "constante_ent"
-     CTE_F : "constante_flot"
+     FLOT : "flotante"
      LPARENS : "("
      RPARENS : ")"
      LKEY : "{"
@@ -75,10 +75,10 @@ gramatica = """
      LETHN : "<"
      NEQ : "!="
 
-
+     %import common.SIGNED_INT    -> CONSTANTE_ENT
+     %import common.SIGNED_FLOAT    -> CONSTANTE_FLOT
      %import common.ESCAPED_STRING   -> STRING
-     %import common.SIGNED_NUMBER    -> NUMBER
-     %import common.CNAME -> NAME
+     %import common.CNAME -> ID
      %import common.LETTER
      %import common.WS_INLINE
      %import common.WS
