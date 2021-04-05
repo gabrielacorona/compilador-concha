@@ -21,10 +21,8 @@ gramatica = """
                | ciclo
      ciclo : WHILE cond_body bloque
      asignacion : ID EQ expresion PTOCOM
-     escritura : PRINT LPARENS expresion RPARENS PTOCOM
-               | PRINT LPARENS STRING RPARENS PTOCOM
-               | PRINT LPARENS STRING COMM LBR expresion RPARENS PTOCOM
-               | PRINT LPARENS STRING RBR RPARENS PTOCOM
+     escritura : PRINT LPARENS escaux RPARENS PTOCOM
+     escaux : expresion COMM escaux | STRING COMMA escaux | expresion | STRING
      expresion : exp MOTHN exp 
                | exp LETHN exp 
                | exp NEQ exp 
