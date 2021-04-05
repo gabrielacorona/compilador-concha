@@ -22,30 +22,28 @@ gramatica = """
      ciclo : WHILE cond_body bloque
      asignacion : ID EQ expresion PTOCOM
      escritura : PRINT LPARENS escaux RPARENS PTOCOM
-     escaux : expresion COMM escaux | STRING COMMA escaux | expresion | STRING
+     escaux : expresion COMM escaux | STRING COMM escaux | expresion | STRING
      expresion : exp MOTHN exp 
                | exp LETHN exp 
                | exp NEQ exp 
                | exp
-     condicion : IF cond_body bloque ELSE bloque PTOCOM
-               | IF cond_body bloque PTOCOM
+     condicion : IF cond_body bloque cond_aux
      cond_body : LPARENS expresion RPARENS
-     exp : termino 
-               | SUM 
-               | SUB 
-               | exp  
-     termino : factor 
-               | MUL 
-               | DIV 
-               | termino
-     factor : LPARENS expresion RPARENS 
-               | SUM 
-               | SUB 
-               | constante 
-               | SUM constante 
-               | SUB constante
+     cond_aux : ELSE bloque PTOCOM
+               | PTOCOM
+     exp : termino
+          | termino SUM exp
+          | termino SUB exp
+     termino : factor
+             | factor MUL termino
+             | factor DIV termino
+     factor : SUM constante
+            | SUB constante
+            | constante
+            | LPARENS expresion LPARENS
      constante : ID 
-               | NUMBER
+               | CONSTANTE_ENT
+               | CONSTANTE_FLOT
      
      PROGRAMA : "programa"
      IF : "si"
