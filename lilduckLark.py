@@ -40,7 +40,7 @@ gramatica = """
      factor : SUM constante
             | SUB constante
             | constante
-            | LPARENS expresion LPARENS
+            | LPARENS expresion RPARENS
      constante : ID 
                | CONSTANTE_ENT
                | CONSTANTE_FLOT
@@ -51,7 +51,6 @@ gramatica = """
      VAR : "var"
      PRINT : "escribir"
      WHILE : "mientras"
-     STRING : "cadena"
      INT : "entero"
      FLOT : "flotante"
      LPARENS : "("
@@ -100,26 +99,11 @@ def main():
      finally:
           fileBuena.close()
           fileMala.close()
-     
 
 
 def test(test_lilduck1):
-     #  sintaxis correcta  contenido de goodTest.py
-     # test_lilduck1 ="""
-     # program id : {
-     #      print(id);
-     # }  
-     # """
-
-     # sintaxis incorrecta falta  punto y comma y cerrar corchete  contenido de badTest.py
-     # test_lilduck2 = """
-     # program id : {
-     #      print(id)
-     # """
-
      parser = Lark(gramatica,start = "programa")
      try:
-          #print(parser.parse(test_lilduck1).pretty())
           if(parser.parse(test_lilduck1)):
                print("Correct Syntax!")
                
