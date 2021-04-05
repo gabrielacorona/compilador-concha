@@ -6,18 +6,20 @@
 
 from lark import Lark
 
-
 gramatica = """
      programa : PROGRAMA ID COLN vars bloque
-               |PROGRAMA ID COLN bloque
-     vars : VAR ID PTO COLN tipo
-               | VAR ID COLN tipo
-     tipo : NUMBER 
-     bloque : LKEY estatuto RKEY
-     ciclo : WHILE cond_body bloque
+               | PROGRAMA ID COLN bloque
+     vars : VAR varaux COLN tipo PTOCOM
+     varaux : ID COMM varaux
+            | ID
+     tipo : INT | FLOT
+     bloque : LKEY bloqaux RKEY
+     bloqaux : estatuto bloqaux | estatuto 
      estatuto : asignacion 
                | condicion 
                | escritura
+               | ciclo
+     ciclo : WHILE cond_body bloque
      asignacion : ID EQ expresion PTOCOM
      escritura : PRINT LPARENS expresion RPARENS PTOCOM
                | PRINT LPARENS STRING RPARENS PTOCOM
@@ -87,9 +89,6 @@ gramatica = """
      %ignore " "
 
 """
-
-
-
 
 
 def main():
