@@ -12,14 +12,17 @@ gramatica = """
      vars : VAR varaux COLN tipo PTOCOM
      varaux : ID COMM varaux
             | ID
-     tipo : INT | FLOT
+     tipo : INT | FLOT | STR
      bloque : LKEY bloqaux RKEY
      bloqaux : estatuto bloqaux | estatuto 
-     estatuto : asignacion 
+     estatuto : declaracion
+               | asignacion 
                | condicion 
                | escritura
                | ciclo
-     ciclo : WHILE cond_body bloque
+     ciclo : wh_loop
+     wh_loop : WHILE cond_body bloque
+     declaracion : tipo asignacion
      asignacion : ID EQ expresion PTOCOM
      escritura : PRINT LPARENS escaux RPARENS PTOCOM
      escaux : expresion COMM escaux | STRING COMM escaux | expresion | STRING
@@ -52,13 +55,12 @@ gramatica = """
      PRINT : "escribir"
      WHILE : "mientras"
      INT : "entero"
+     STR : "cadena"
      FLOT : "flotante"
      LPARENS : "("
      RPARENS : ")"
      LKEY : "{"
      RKEY : "}"
-     LBR : "["
-     RBR : "]"
      SUM : "+"
      SUB : "-"
      MUL : "*"
@@ -94,8 +96,8 @@ def main():
           print("Prueba GoodTest")
           test(lilduck)
           lilduck2 = fileMala.read()
-          print("Prueba BadTest")
-          test(lilduck2)
+          # print("Prueba BadTest")
+          # test(lilduck2)
      finally:
           fileBuena.close()
           fileMala.close()
