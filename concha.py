@@ -7,23 +7,31 @@
 from lark import Lark
 
 gramatica = """
-     programa : PROGRAMA ID COLN vars bloque
-               | PROGRAMA ID COLN bloque
+     programa : PROGRAMA ID COLN prog_aux
+                | PROGRAMA ID COLN prog_aux prog_aux_func
+     prog_aux : vars bloque
+                | bloque
+     prog_aux_func : func prog_aux_func
+                    | func
      vars : VAR varaux COLN tipo PTOCOM
      varaux : ID COMM varaux
             | ID
      tipo : INT | FLOT | STR
      bloque : LKEY bloqaux RKEY
      bloqaux : estatuto bloqaux | estatuto
-     func : FUNCION ID LPARENS  tipo STRING 
-     parm : tipo varaux
-     varaux : ID COMM varaux
-            | ID
-     estatuto : declaracion
+     func : FUNCION ID LPARENS parms RPARENS bloque
+     parms : tipo ID COMM parms
+            | tipo ID 
+     estatuto : call_func
+               | declaracion
                | asignacion 
                | condicion 
                | escritura
                | ciclo
+     call_func : ID LPARENS call_func_aux RPARENS PTOCOM
+     call_func_aux : accepted_params COMM call_func_aux
+                    | accepted_params
+     accepted_params : constante | STRING
      ciclo : wh_loop | for_loop
      for_loop : FOR LPARENS INT ID EQ exp PTOCOM expresion_comp PTOCOM asign_op RPARENS bloque 
      wh_loop : WHILE cond_body bloque
