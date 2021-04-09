@@ -1,3 +1,4 @@
+![alt text](https://github.com/gabrielacorona/compilador-concha/Logo.jpeg)
 # Compilador Concha
 'Concha' language is a high-level programming language that can be used for object oriented programming. The main characteristic of this language is that the syntax expressions are in spanish so that any spanish speaker can understand and learn the language.
 
