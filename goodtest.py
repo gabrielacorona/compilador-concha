@@ -1,4 +1,4 @@
-programa ab : var ab, bb, bc : entero;
+programa miPrimerPrograma : var ab, bb, bc : entero;
 {
      cadena ab;
      entero myArr[30];
@@ -10,20 +10,11 @@ programa ab : var ab, bb, bc : entero;
           escribir(2 * 3);
      };
      por(entero a = 4; a < 4 ; a = a + 1){
-          ab = amfkmkmf + 3;
+          ab = a + 3;
      }
-     escribir("hola", ab, 2 * 2, 1);
-     caro("cokrfk", 4, 3, 3.2);
+     saludarConEdad(22, "Caro");
 }
 
-funcion caro(entero gaba, cadena anacris){
-     escribir("hola", ab, 2 * 2, 1);
-}
-
-funcion caro(entero gaba, cadena anacris){
-     escribir("hola", ab, 2 * 2, 1);
-}
-
-funcion caro(entero gaba, cadena anacris){
-     escribir("hola", ab, 2 * 2, 1);
+funcion saludarConEdad(entero edad, cadena nombre){
+     escribir("hola", nombre, "tienes ", edad, "años");
 }
