@@ -9,63 +9,63 @@ from lark import Tree, Transformer
 from transformer import TransformerLark
 
 gramatica = """
-     programa : PROGRAMA ID COLN prog_aux
+     ?programa : PROGRAMA ID COLN prog_aux
                 | PROGRAMA ID COLN prog_aux prog_aux_func
-     prog_aux : vars bloque
+     ?prog_aux : vars bloque
                 | bloque
-     prog_aux_func : func prog_aux_func
+     ?prog_aux_func : func prog_aux_func
                     | func
-     vars : VAR varaux COLN tipo PTOCOM
-     varaux : ID COMM varaux
+     ?vars : VAR varaux COLN tipo PTOCOM
+     ?varaux : ID COMM varaux
             | ID
-     tipo : INT | FLOT | STR
-     bloque : LKEY bloqaux RKEY
-     bloqaux : estatuto bloqaux | estatuto
-     func : FUNCION ID LPARENS parms RPARENS bloque
-     parms : tipo ID COMM parms
+     ?tipo : INT | FLOT | STR
+     ?bloque : LKEY bloqaux RKEY
+     ?bloqaux : estatuto bloqaux | estatuto
+     ?func : FUNCION ID LPARENS parms RPARENS bloque ->functions_scope
+     ?parms : tipo ID COMM parms
             | tipo ID 
-     estatuto : call_func
+     ?estatuto : call_func
                | declaracion
                | asignacion 
                | condicion 
                | escritura
                | ciclo
-     call_func : ID LPARENS call_func_aux RPARENS PTOCOM
-     call_func_aux : accepted_params COMM call_func_aux
+     ?call_func : ID LPARENS call_func_aux RPARENS PTOCOM
+     ?call_func_aux : accepted_params COMM call_func_aux
                     | accepted_params
-     accepted_params : constante | STRING
-     ciclo : wh_loop | for_loop
-     for_loop : FOR LPARENS INT ID EQ exp PTOCOM expresion_comp PTOCOM asign_op RPARENS bloque 
-     wh_loop : WHILE cond_body bloque
-     declaracion : tipo ID PTOCOM
+     ?accepted_params : constante | STRING
+     ?ciclo : wh_loop | for_loop
+     ?for_loop : FOR LPARENS INT ID EQ exp PTOCOM expresion_comp PTOCOM asign_op RPARENS bloque 
+     ?wh_loop : WHILE cond_body bloque
+     ?declaracion : tipo ID PTOCOM
                | tipo ID arr_idx PTOCOM
-     asignacion : asign_op PTOCOM
+     ?asignacion : asign_op PTOCOM -> asignaciones_scope
                | ID arr_idx EQ expresion PTOCOM
                | ID EQ STRING PTOCOM
-     asign_op : ID EQ expresion 
-     arr_idx : CORCH_LEFT CONSTANTE_ENT CORCH_RIGHT
-     escritura : PRINT LPARENS escaux RPARENS PTOCOM
-     escaux : expresion COMM escaux | STRING COMM escaux | expresion | STRING
-     expresion : expresion_comp
+     ?asign_op : ID EQ expresion 
+     ?arr_idx : CORCH_LEFT CONSTANTE_ENT CORCH_RIGHT
+     ?escritura : PRINT LPARENS escaux RPARENS PTOCOM
+     ?escaux : expresion COMM escaux | STRING COMM escaux | expresion | STRING
+     ?expresion : expresion_comp
                | exp
-     expresion_comp : exp MOTHN exp 
+     ?expresion_comp : exp MOTHN exp 
                | exp LETHN exp 
                | exp NEQ exp 
-     condicion : IF cond_body bloque cond_aux
-     cond_body : LPARENS expresion RPARENS
-     cond_aux : ELSE bloque PTOCOM
+     ?condicion : IF cond_body bloque cond_aux
+     ?cond_body : LPARENS expresion RPARENS
+     ?cond_aux : ELSE bloque PTOCOM
                | PTOCOM
-     exp : termino
+     ?exp : termino
           | termino SUM exp
           | termino SUB exp
-     termino : factor
+     ?termino : factor
              | factor MUL termino
              | factor DIV termino
-     factor : SUM constante
+     ?factor : SUM constante
             | SUB constante
             | constante
             | LPARENS expresion RPARENS
-     constante : ID 
+     ?constante : ID 
                | CONSTANTE_ENT
                | CONSTANTE_FLOT
      
@@ -113,6 +113,7 @@ gramatica = """
 """
 
 
+
 def main():
      fileBuena = open('goodTest.py')
      fileMala = open('badTest.py')
@@ -129,15 +130,23 @@ def main():
 
 
 def test(test_lilduck1):
-     parser = Lark(gramatica,start = "programa",parser = 'lalr', transformer=TransformerLark)
+     parser = Lark(gramatica,start = "programa",parser = 'lalr', transformer=TransformerLark())
      try:
+          main_parser = parser.parse
           if(parser.parse(test_lilduck1)):
-               arbol = parser.parse(test_lilduck1)
-               TransformerLark().transform(arbol)
-               print(arbol.pretty())
-               all_tokens = arbol.scan_values('func')
-               for a in all_tokens:
-                    print(a)
+               # testInput = main_parser(test_lilduck1)
+               # print("test Input result")
+               # print(type(testInput))
+               # for i,test_lilduck1 in enumerate(testInput):
+               #      print( f"{i} {test_lilduck1}")
+               # print()
+
+               #arbol = parser.parse(test_lilduck1)
+               #TransformerLark().transform(arbol)
+               # print(arbol.pretty())
+               # all_tokens = arbol.scan_values('func')
+               # for a in all_tokens:
+               #      print(a)
                print("Correct Syntax!")
                
      except Exception as ex:
