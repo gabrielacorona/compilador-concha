@@ -1,10 +1,12 @@
 
 # LittleDuck2020
-# Herramienta que se está usando : Lark
+# Herramienta que se esta usando : Lark
 # https://github.com/lark-parser/lark
 # }
 
 from lark import Lark
+from lark import Tree, Transformer
+from transformer import TransformerLark
 
 gramatica = """
      programa : PROGRAMA ID COLN prog_aux
@@ -127,9 +129,15 @@ def main():
 
 
 def test(test_lilduck1):
-     parser = Lark(gramatica,start = "programa")
+     parser = Lark(gramatica,start = "programa",parser = 'lalr', transformer=TransformerLark)
      try:
           if(parser.parse(test_lilduck1)):
+               arbol = parser.parse(test_lilduck1)
+               TransformerLark().transform(arbol)
+               print(arbol.pretty())
+               all_tokens = arbol.scan_values('func')
+               for a in all_tokens:
+                    print(a)
                print("Correct Syntax!")
                
      except Exception as ex:
