@@ -1,7 +1,7 @@
 programa miPrimerPrograma : var ab, bb, bc : entero;
 {
      cadena ab;
-     entero myArr[30];
+     entero myArr[3];
      ab = "hola";
      myArr[2] = 3;
      si(2 != 2){
@@ -12,19 +12,19 @@ programa miPrimerPrograma : var ab, bb, bc : entero;
      por(entero a = 4; a < 4 ; a = a + 1){
           ab = a + 3;
      }
-     saludarConEdad(22, "Caro");
 }
 
-funcion saludarConEdad(entero edad, cadena nombre){
+vacio funcion saludarConEdad(entero edad, cadena nombre){
      cadena ab;
-     entero myArr[30];
+     cadena bb;
+     entero myArr[40];
      ab = "hola";
-     bb= 0;
+     bb = 0;
      bc = 0+9;
      escribir("hola", nombre, "tienes ", edad, "años");
 }
 
-funcion saludarChido(entero edad, cadena nombre){
+entero funcion saludarChido(entero edad, cadena nombre){
      cadena ab;
      entero myArr[30];
      aaa = "queonda";

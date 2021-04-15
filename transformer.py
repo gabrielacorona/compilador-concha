@@ -1,7 +1,6 @@
 import lark
 from lark import Tree, Transformer, v_args
 
-
 currFunction = ""
 
 class TransformerLark(Transformer):
@@ -9,32 +8,46 @@ class TransformerLark(Transformer):
   def __init__(self):
     self.functions = {}
   
-  # def globalScope(self,args):
-  #   self.functions["global"] = {"tipo" :"void" , "vars" :{}}
-  #   print(self.functions["global"])
-  #   return Tree('programa', args)
+  def global_scope(self,args):
+    self.functions["global"] = {"tipo" :"void" , "vars" :{}}
+    func_var_table = self.functions["global"]
+
+    declaraciones = args[3].find_data('declaracion')
+    temp = []
+    for i in declaraciones :
+      temp.append(i.children)
+
+    for i in temp:
+      # for x in i :
+      #   if(x.value):
+      #     print(x.value)
+      #   else:
+      #     print("puto tree")
+      #print(i[0].value)
+      func_var_table['vars'] = {i[1].value : {"tipo" : i[0].value, "valor": -9999}}
+
+    print(self.functions)
+    return Tree('programa', args)
   
   def functions_scope(self,value):
-    self.currFunction =  value[1]
-    print(value[1])
-    res = value[1]
-    asignaciones = value[5].find_data('asignacion')
-    asign_op = value[5].find_data('asign_op')
+    self.functions[value[2].value] = {"tipo" : value[0].value, "vars": {}}
+    func_var_table = self.functions[value[2]]
 
+    declaraciones = value[6].find_data('declaracion')
     temp = []
-    for i in asignaciones :
+    for i in declaraciones :
       temp.append(i.children)
-    for i in asign_op:
-      temp.append(i.children)
+    
+    func_var_table['vars'] = []
     for i in temp:
-      print(i[2])
-    return res
-  
+      func_var_table['vars'].append( {i[1].value : {"tipo" : i[0].value, "valor": -9999}})
+      for x in i:
+        if isinstance(x,lark.tree.Tree):
+          func_var_table['vars'].append( {i[1].value : {"tipo" : "arr_" + i[0].value  , "valor": [], "lim": x.children[1].value}})
 
+    res = 1
+    return res
 
   def asignaciones_scope(self,value):
-   # print(currFunction, "asignaciones",value[0])
-    # for i in value[0]:
-    #   print(i)
     res = value[0]
     return res
