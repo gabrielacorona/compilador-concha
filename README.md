@@ -30,3 +30,6 @@ programa miPrimerPrograma : var ab, bb, bc : entero;
 funcion saludarConEdad(entero edad, cadena nombre){
      escribir("hola", nombre, "tienes ", edad, "años");
 }
+
+## Segundo avance
+In this second revision we implemented the function directory as well as the symbol table used to identify variables written in the language. We used Transformer interface from Lark library to generate an AST from the syntax that will be compiled.
