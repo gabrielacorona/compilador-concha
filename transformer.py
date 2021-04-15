@@ -15,6 +15,7 @@ class TransformerLark(Transformer):
     temp = []
     for i in declaraciones :
       temp.append(i.children)
+
     for i in temp:
       func_var_table['vars'] = {i[1].value : {"tipo" : i[0].value, "valor": -9999}}
 

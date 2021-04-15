@@ -117,8 +117,8 @@ gramatica = """
 
 
 def main():
-     fileBuena = open('goodTest.py')
-     fileMala = open('badTest.py')
+     fileBuena = open('tests/goodTest.py')
+     fileMala = open('tests/badTest.py')
      try:
           lilduck = fileBuena.read()
           print("Prueba GoodTest")
