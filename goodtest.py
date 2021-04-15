@@ -23,3 +23,12 @@ funcion saludarConEdad(entero edad, cadena nombre){
      bc = 0+9;
      escribir("hola", nombre, "tienes ", edad, "años");
 }
+
+funcion saludarChido(entero edad, cadena nombre){
+     cadena ab;
+     entero myArr[30];
+     aaa = "queonda";
+     bbbbb= 2;
+     bccccc = 1-9;
+     escribir("hola", nombre, "tienes ", edad, "años");
+}

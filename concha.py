@@ -21,7 +21,7 @@ gramatica = """
      ?tipo : INT | FLOT | STR
      ?bloque : LKEY bloqaux RKEY
      ?bloqaux : estatuto bloqaux | estatuto
-     ?func : FUNCION ID LPARENS parms RPARENS bloque ->functions_scope
+     ?func : FUNCION ID LPARENS parms RPARENS bloque -> functions_scope
      ?parms : tipo ID COMM parms
             | tipo ID 
      ?estatuto : call_func
