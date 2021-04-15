@@ -40,7 +40,7 @@ gramatica = """
      ?wh_loop : WHILE cond_body bloque
      ?declaracion : tipo ID PTOCOM
                | tipo ID arr_idx PTOCOM
-     ?asignacion : asign_op PTOCOM -> asignaciones_scope
+     ?asignacion : asign_op PTOCOM 
                | ID arr_idx EQ expresion PTOCOM
                | ID EQ STRING PTOCOM
      ?asign_op : ID EQ expresion 

@@ -18,12 +18,6 @@ class TransformerLark(Transformer):
       temp.append(i.children)
 
     for i in temp:
-      # for x in i :
-      #   if(x.value):
-      #     print(x.value)
-      #   else:
-      #     print("puto tree")
-      #print(i[0].value)
       func_var_table['vars'] = {i[1].value : {"tipo" : i[0].value, "valor": -9999}}
 
     print(self.functions)
@@ -46,8 +40,4 @@ class TransformerLark(Transformer):
           func_var_table['vars'].append( {i[1].value : {"tipo" : "arr_" + i[0].value  , "valor": [], "lim": x.children[1].value}})
 
     res = 1
-    return res
-
-  def asignaciones_scope(self,value):
-    res = value[0]
     return res
