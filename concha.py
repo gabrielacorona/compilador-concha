@@ -9,8 +9,8 @@ from lark import Tree, Transformer
 from transformer import TransformerLark
 
 gramatica = """
-     ?programa : PROGRAMA ID COLN prog_aux
-                | PROGRAMA ID COLN prog_aux prog_aux_func
+     ?programa : PROGRAMA ID COLN prog_aux -> global_scope
+                | PROGRAMA ID COLN prog_aux prog_aux_func  -> global_scope
      ?prog_aux : vars bloque
                 | bloque
      ?prog_aux_func : func prog_aux_func
@@ -19,9 +19,10 @@ gramatica = """
      ?varaux : ID COMM varaux
             | ID
      ?tipo : INT | FLOT | STR
+     ?tipo_funcs : tipo | VACIO
      ?bloque : LKEY bloqaux RKEY
      ?bloqaux : estatuto bloqaux | estatuto
-     ?func : FUNCION ID LPARENS parms RPARENS bloque -> functions_scope
+     ?func : tipo_funcs FUNCION ID LPARENS parms RPARENS bloque -> functions_scope
      ?parms : tipo ID COMM parms
             | tipo ID 
      ?estatuto : call_func
@@ -98,6 +99,7 @@ gramatica = """
      CORCH_RIGHT : "]"
      FOR : "por"
      FUNCION : "funcion"
+     VACIO :  "vacio"
 
      %import common.SIGNED_INT    -> CONSTANTE_ENT
      %import common.SIGNED_FLOAT    -> CONSTANTE_FLOT
