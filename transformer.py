@@ -1,3 +1,4 @@
+import lark
 from lark import Tree, Transformer, v_args
 
 currFunction = ""
@@ -40,7 +41,10 @@ class TransformerLark(Transformer):
     func_var_table['vars'] = []
     for i in temp:
       for x in i:
-        print(x)
+        if isinstance(x,lark.tree.Tree):
+          print(x.children)
+        #print(type(x))
+        #<class 'lark.tree.Tree'>
       func_var_table['vars'].append( {i[1].value : {"tipo" : i[0].value, "valor": -9999}})
     res = 1
     return res
