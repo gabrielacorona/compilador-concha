@@ -8,6 +8,11 @@ Democratize the process of learning a programming language by removing the langu
 ## Primer avance
 In this first revision we implemented the Lexical/Syntactical analysis of our language, introducing the Tokens and Grammar used to parse the syntax of any program written in Concha in the file 'concha.py' . Additionally, the railroad diagrams are attached in this repository that display graphically the BNF grammar we designed for our programming language.
 
+## Segundo avance
+In this second revision we implemented the function directory as well as the symbol table used to identify variables written in the language. We used Transformer interface from Lark library to generate an AST from the syntax that will be compiled.
+ 
+
+
 ## Example of program written in Concha
 ```python
 programa miPrimerPrograma : var ab, bb, bc : entero;
@@ -30,6 +35,3 @@ programa miPrimerPrograma : var ab, bb, bc : entero;
 funcion saludarConEdad(entero edad, cadena nombre){
      escribir("hola", nombre, "tienes ", edad, "años");
 }
-
-## Segundo avance
-In this second revision we implemented the function directory as well as the symbol table used to identify variables written in the language. We used Transformer interface from Lark library to generate an AST from the syntax that will be compiled.
