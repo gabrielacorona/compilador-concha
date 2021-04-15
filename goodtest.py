@@ -1,7 +1,7 @@
 programa miPrimerPrograma : var ab, bb, bc : entero;
 {
      cadena ab;
-     entero myArr[30];
+     entero myArr;
      ab = "hola";
      myArr[2] = 3;
      si(2 != 2){
