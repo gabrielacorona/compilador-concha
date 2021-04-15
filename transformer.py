@@ -26,7 +26,7 @@ class TransformerLark(Transformer):
       #print(i[0].value)
       func_var_table['vars'] = {i[1].value : {"tipo" : i[0].value, "valor": -9999}}
 
-    #print(self.functions)
+    print(self.functions)
     return Tree('programa', args)
   
   def functions_scope(self,value):
@@ -40,12 +40,11 @@ class TransformerLark(Transformer):
     
     func_var_table['vars'] = []
     for i in temp:
+      func_var_table['vars'].append( {i[1].value : {"tipo" : i[0].value, "valor": -9999}})
       for x in i:
         if isinstance(x,lark.tree.Tree):
-          print(x.children)
-        #print(type(x))
-        #<class 'lark.tree.Tree'>
-      func_var_table['vars'].append( {i[1].value : {"tipo" : i[0].value, "valor": -9999}})
+          func_var_table['vars'].append( {i[1].value : {"tipo" : "arr_" + i[0].value  , "valor": [], "lim": x.children[1].value}})
+
     res = 1
     return res
 
