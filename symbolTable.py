@@ -21,7 +21,7 @@ class symbolTable:
         currVarDic = func_var_table['vars']
         for i in temp:          
             if i[1].value in currVarDic:
-                print("ERROR: ",i[1].value," variable already declared primer for")
+                print("ERROR: ",i[1].value," variable already declared")
             else:
                 currVarDic[i[1].value] = {"tipo" : i[0].value, "valor": -9999}
             #para arreglos y su capacidad
@@ -31,7 +31,6 @@ class symbolTable:
 
     def lookupVars(self,scope,key):
         dictValues = self.functions[scope]
-        print("looking up...")
         if key in dictValues['vars']:
             tipo, val = self.getVarData(dictValues['vars'][key])
             return tipo, val

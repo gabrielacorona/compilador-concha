@@ -23,7 +23,6 @@ class TransformerLark(Transformer):
     return Tree('programa', value)
   
   def functions_scope(self,value):
-    #print(value)
     # sacando operaciones dentro de scope para cubo semántico
     operaciones =[]
     temporalOp = value[6].find_data('asign_op')
@@ -37,37 +36,39 @@ class TransformerLark(Transformer):
 
     # sacando tabla de símbolos
     symbolTable.populateSymbolTable(value)
-    print(value[2])
-    symbolTable.lookupVars(value[2], "repp")
-    self.validateSemanticCube(operaciones)
 
-  def validateSemanticCube(self, operaciones):
+#    print("OOP", operaciones)
+    self.validateSemanticCube(value[2],operaciones)
+
+  def validateSemanticCube(self,scope, operaciones):
     astTree = []
     for i in operaciones:
+      print(i)
       astTree.append(i.children)
+
     for i in astTree:
       if isinstance(i[2],lark.tree.Tree):
         tempCube = i[2].children
+        print("whoareu")
+        pp.pprint(tempCube)
+        for i in tempCube:
+          print("aaa", i.value)
+        type, val = symbolTable.lookupVars(scope,i[0])
+        # print("tipooo", type)
         cube.validateType(tempCube)
     print()
     print("cambio de func")
 
 
-
-
-
-
-
-
-
 #TODO
 
-# checa si está en tabla de simbolos
 # si sí está agarra los tipos y manda a validación
-# si no, manda error de not declared
 # si es valido empieza a meter a stacks
 # agregar gramática de declarar y asignar al mismo tiempo ej 'entero h = 10;'
 # agregar a gramática input
 # "        "    "      comentarios jiji
 # operaciones de bools
 # operaciones de strings
+
+#whoareu [Token('ID', 'numeroA'), Token('SUM', '+'),
+#   Tree('exp', [Token('ID', 'numeroB'), Token('SUM', '+'), Tree('exp', [Token('ID', 'numeroX'), Token('SUM', '+'), Tree('exp', [Token('CONSTANTE_ENT', '9'), Token('SUM', '+'), Tree('exp', [Token('CONSTANTE_ENT', '0'), Token('SUB', '-'), Tree('termino', [Token('CONSTANTE_ENT', '10'), Token('DIV', '/'), Tree('termino', [Token('CONSTANTE_ENT', '8'), Token('MUL', '*'), Token('CONSTANTE_ENT', '7')])])])])])])]
