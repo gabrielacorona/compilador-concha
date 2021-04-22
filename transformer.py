@@ -37,14 +37,9 @@ class TransformerLark(Transformer):
 
     # sacando tabla de símbolos
     symbolTable.populateSymbolTable(value)
-    
-    
+    print(value[2])
+    symbolTable.lookupVars(value[2], "repp")
     self.validateSemanticCube(operaciones)
-    symbolTable.printSymbolTable()
-    
-
-
-
 
   def validateSemanticCube(self, operaciones):
     astTree = []
