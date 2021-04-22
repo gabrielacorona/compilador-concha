@@ -2,14 +2,15 @@ programa miPrimerPrograma : var ab, bb, bc : entero;
 {
      cadena ab;
      entero myArr[3];
-     ab = "hola";
-     myArr[2] = 3;
-     si(2 != 2){
-          ab = 2*2;
+     ab = "hola gaba";
+     myArr[2] = 3 + 2;
+     si(9 != 1){
+          ab = i * 6.0;
+          c = a+whoareu;
      } sino {
           escribir(2 * 3);
      };
-     por(entero a = 4; a < 4 ; a = a + 1){
+     por(entero a = 7; a < 8 ; a = a + 1){
           ab = a + 3;
      }
 }
@@ -20,7 +21,15 @@ vacio funcion saludarConEdad(entero edad, cadena nombre){
      entero myArr[40];
      ab = "hola";
      bb = 0;
-     bc = 0+9;
+     bc = 1/9;
+     h = 0 +1;
+     i = 9*8;
+     k=9-1;
+     q= 1/9;
+
+     l=i* 9.0;
+
+
      escribir("hola", nombre, "tienes ", edad, "años");
 }
 
@@ -28,7 +37,7 @@ entero funcion saludarChido(entero edad, cadena nombre){
      cadena ab;
      entero myArr[30];
      aaa = "queonda";
-     bbbbb= 2;
+     bbbbb = 2;
      bccccc = 1-9;
      escribir("hola", nombre, "tienes ", edad, "años");
 }
