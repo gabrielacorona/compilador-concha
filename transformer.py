@@ -40,6 +40,7 @@ class TransformerLark(Transformer):
     
     
     self.validateSemanticCube(operaciones)
+    symbolTable.printSymbolTable()
     
 
 

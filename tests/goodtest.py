@@ -1,7 +1,8 @@
 programa miPrimerPrograma : var ab, bb, bc : entero;
 {
-     cadena ab;
+     cadena repreprep;
      entero myArr[3];
+     flotante repreprep;
      ab = "hola gaba";
      myArr[2] = 3 + 2;
      si(9 != 1){
@@ -16,7 +17,8 @@ programa miPrimerPrograma : var ab, bb, bc : entero;
 }
 
 vacio funcion saludarConEdad(entero edad, cadena nombre){
-     cadena ab;
+     cadena repp;
+     entero repp;
      entero h;
      cadena bb;
      entero myArr[40];
