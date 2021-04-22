@@ -1,8 +1,10 @@
 import lark
 from lark import Tree, Transformer, v_args
 from semanticCube import *
+from symbolTable import *
 
 cube = semanticCube()
+symbolTable = symbolTable()
 functions = {}
 
 class TransformerLark(Transformer):
@@ -34,20 +36,8 @@ class TransformerLark(Transformer):
       escritura.append(i)
 
     # sacando tabla de símbolos
-    functions[value[2].value] = {"tipo" : value[0].value, "vars": {}}
-    func_var_table = functions[value[2]]
-
-    declaraciones = value[6].find_data('declaracion')
-    temp = []
-    for i in declaraciones :
-      temp.append(i.children)
+    symbolTable.populateSymbolTable(value)
     
-    func_var_table['vars'] = []
-    for i in temp:
-      func_var_table['vars'].append( {i[1].value : {"tipo" : i[0].value, "valor": -9999}})
-      for x in i:
-        if isinstance(x,lark.tree.Tree):
-          func_var_table['vars'].append( {i[1].value : {"tipo" : "arr_" + i[0].value  , "valor": [], "lim": x.children[1].value}})
     
     self.validateSemanticCube(operaciones)
     
@@ -75,10 +65,12 @@ class TransformerLark(Transformer):
 
 
 #TODO
+
 # checa si está en tabla de simbolos
 # si sí está agarra los tipos y manda a validación
 # si no, manda error de not declared
 # si es valido empieza a meter a stacks
+# agregar gramática de declarar y asignar al mismo tiempo ej 'entero h = 10;'
 # agregar a gramática input
 # "        "    "      comentarios jiji
 # operaciones de bools

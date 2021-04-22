@@ -17,8 +17,10 @@ programa miPrimerPrograma : var ab, bb, bc : entero;
 
 vacio funcion saludarConEdad(entero edad, cadena nombre){
      cadena ab;
+     entero h;
      cadena bb;
      entero myArr[40];
+     entero hola[90];
      ab = "hola";
      bb = 0;
      bc = 1/9;
@@ -35,7 +37,7 @@ vacio funcion saludarConEdad(entero edad, cadena nombre){
 
 entero funcion saludarChido(entero edad, cadena nombre){
      cadena ab;
-     entero myArr[30];
+     entero miarreglo[30];
      aaa = "queonda";
      bbbbb = 2;
      bccccc = 1-9;
